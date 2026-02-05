@@ -245,7 +245,7 @@ exports.sendotp = async (req, res) => {
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
 
-     await mailSender(
+     let respon = await mailSender(
       email,
       "OTP Verification",
       `Your OTP is: ${otp}`
@@ -255,6 +255,8 @@ exports.sendotp = async (req, res) => {
       success: true,
       message: `OTP Sent Successfully`,
       otp,
+     respon,
+     email
     })
   } catch (error) {
     console.log(error.message)
