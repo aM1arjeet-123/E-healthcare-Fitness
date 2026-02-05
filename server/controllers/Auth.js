@@ -244,6 +244,12 @@ exports.sendotp = async (req, res) => {
     }
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
+
+     await mailSender(
+      email,
+      "OTP Verification",
+      `Your OTP is: ${otp}`
+    )
     console.log("OTP Body", otpBody)
     res.status(200).json({
       success: true,
